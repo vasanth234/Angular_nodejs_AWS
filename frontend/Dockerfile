@@ -23,7 +23,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy Angular build output (IMPORTANT FIX)
-COPY --from=build /app/dist/* /usr/share/nginx/html/
+COPY --from=build /app/dist/frontend/ /usr/share/nginx/html/
 
 # Expose port
 EXPOSE 80
