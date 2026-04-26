@@ -1,0 +1,49 @@
+<!-- Navbar -->
+<header class="navbar">
+    <a routerLink="/profile" >profile</a>
+  <h1>🎟️ BookMyEvent</h1>
+
+  <nav>
+    <a routerLink="/">Home</a>
+    <a routerLink="/bookings">My Bookings</a>
+    <a routerLink="/login">Logout</a>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h2>Discover Amazing Events</h2>
+  <p>Book tickets for concerts, movies & shows</p>
+
+  <input
+    type="text"
+    placeholder="Search events..."
+    [(ngModel)]="searchText"
+  />
+</section>
+
+<!-- Events Section -->
+<section class="events">
+  <h2>Popular Events</h2>
+
+  <div class="event-grid">
+
+    <div class="card"
+         *ngFor="let event of events | filterPipe:searchText">
+
+      <img [src]="event.image" alt="{{event.title}}" />
+
+      <div class="card-content">
+        <h3>{{ event.title }}</h3>
+        <p>📍 {{ event.location }}</p>
+        <p>📅 {{ event.date }}</p>
+
+        <button (click)="bookEvent(event)">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
