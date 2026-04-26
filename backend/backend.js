@@ -37,6 +37,6 @@ app.set("db", docClient)
 app.use("/register", register)
 app.use("/applog", login)
 
-app.listen(3002, () => {
+app.listen(3000, () => {
   console.log('connected server')
 })

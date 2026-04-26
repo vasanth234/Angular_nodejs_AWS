@@ -10,23 +10,18 @@ RUN npm install
 
 COPY . .
 
-# Build Angular app (production)
 RUN npm run build -- --configuration production
-
 
 # =========================
 # Step 2: Serve with Nginx
 # =========================
 FROM nginx:alpine
 
-# Remove default nginx files
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy Angular build output (IMPORTANT FIX)
-COPY --from=build /app/dist/frontend/ /usr/share/nginx/html/
+# ✅ FIXED PATH
+COPY --from=build /app/dist/frontend/browser/ /usr/share/nginx/html/
 
-# Expose port
 EXPOSE 80
 
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
