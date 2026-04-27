@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const { email, password } = req.body;
 
     const params = {
-      TableName: "users",
+      TableName: "usernew",
       Key: { email }
     };
 

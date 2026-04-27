@@ -17,7 +17,7 @@ export class RegisterLogin {
 
   getRegister(user: any) {
     return this.http.post(
-      'http://localhost:3000/register',
+      `${environment.apiUrl}/register`,
       user,
       {
         headers: {
