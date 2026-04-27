@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterPipePipe } from '../filter-pipe-pipe';
 import { RouterLink } from '@angular/router';
-import { Sharedservice } from '../sharedservice';
+import { Sharedservice } from '../services/sharedservice';
 import { RegisterLogin } from '../register-login';
+import { MatDialog } from '@angular/material/dialog';
+import { Matmodal } from '../modalpopup/matmodal/matmodal';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,7 @@ import { RegisterLogin } from '../register-login';
 })
 export class Home {
 
-  constructor(private sharedservice:Sharedservice,private registerLogin:RegisterLogin){
+  constructor(private sharedservice:Sharedservice,private registerLogin:RegisterLogin,private matdialog:MatDialog){
 
   }
 
@@ -57,6 +59,14 @@ export class Home {
 
   get userName() {
   return this.registerLogin.currentUser()?.name;
+}
+
+onshowmodal(){
+this.matdialog.open(Matmodal,{
+  width:'500px',
+  height:'500px'
+
+})
 }
 
 

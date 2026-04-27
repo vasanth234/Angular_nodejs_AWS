@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sharedservice } from '../sharedservice';
+import { Sharedservice } from '../services/sharedservice';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -34,6 +34,8 @@ event:any
 }
 
 
+
+
 submitForm(form: any) {
   if (form.invalid) {
     this.toastservice.error(
@@ -65,6 +67,7 @@ submitForm(form: any) {
         progressBar: true
       }
     );
+    form.resetForm()
   });
 }
 }

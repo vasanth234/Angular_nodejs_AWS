@@ -2,25 +2,28 @@ const express = require("express");
 const router = express.Router();
 
 const { PutCommand } = require("@aws-sdk/lib-dynamodb");
-const { v4: uuidv4 } = require("uuid"); // ✅ add this
+const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   try {
     const db = req.app.get("db");
     const { name, email, password } = req.body;
 
-    // Basic validation
     if (!name || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
+    // ✅ hash password BEFORE saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const params = {
-      TableName: "users",
+      TableName: "usernew",
       Item: {
-       id: Date.now(),        // ✅ REQUIRED primary key
+        id: uuidv4(),
         name,
         email,
-        password
+        password: hashedPassword
       }
     };
 
