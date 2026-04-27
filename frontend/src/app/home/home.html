@@ -1,14 +1,9 @@
 <!-- Navbar -->
 <header class="navbar">
-   <a style="text-decoration: none;"    routerLink="/profile">
-  👤 {{ userName || 'Profile' }}
-</a>
+  <a style="text-decoration: none;" routerLink="/profile">
+    👤 {{ userName || 'Profile' }}
+  </a>
   <h1>🎟️ BookMyEvent</h1>
-  <div class="scroller">
- <p >Your one-stop destination for concerts, movies & live events</p>
-
-  </div>
- 
 
   <nav>
     <a routerLink="/">Home</a>
@@ -16,6 +11,14 @@
     <a routerLink="/login">Logout</a>
   </nav>
 </header>
+
+<!-- Scroller Section - Below Navbar -->
+<div class="scroller">
+  <div class="scroller-text">
+    🎟️ Discover and book concerts, movies & live events instantly • 🎶 Live shows happening this weekend • 🔥 Trending events near you • 💫 Limited time offers available
+    🎟️ Discover and book concerts, movies & live events instantly • 🎶 Live shows happening this weekend • 🔥 Trending events near you • 💫 Limited time offers available
+  </div>
+</div>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -34,7 +37,6 @@
   <h2>Popular Events</h2>
 
   <div class="event-grid">
-
     <div class="card"
          *ngFor="let event of events | filterPipe:searchText">
 
@@ -49,8 +51,6 @@
           Book Now
         </button>
       </div>
-
     </div>
-
   </div>
 </section>

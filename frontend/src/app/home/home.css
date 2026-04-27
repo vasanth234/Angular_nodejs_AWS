@@ -105,25 +105,90 @@ button {
 button:hover {
   background: #e63e1f;
 }
-
+/* Scroller Section - Below Navbar */
 .scroller {
-  background-color: lightgreen;
-  color: black;
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  padding: 0;
   overflow: hidden;
-  white-space: nowrap;
-  padding: 10px;
+  position: relative;
+  border-bottom: 3px solid #ff006e;
+  box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
 }
 
 .scroller-text {
-  display: inline-block;
-  animation: scroll 10s linear infinite;
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 25s linear infinite;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 16px 0;
+  letter-spacing: 1px;
 }
 
+/* Duplicate text for seamless loop */
+.scroller-text::before {
+  content: attr(data-text);
+  margin-right: 50px;
+}
+
+/* Smooth infinite scroll animation */
 @keyframes scroll {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
+  }
+}
+
+/* Hover effect - slow down on hover */
+.scroller:hover .scroller-text {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+/* Gradient overlay for fade effect on edges */
+.scroller::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(90deg, #000000 0%, transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.scroller::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(90deg, transparent 0%, #000000 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scroller-text {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+
+  .scroller::before,
+  .scroller::after {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroller-text {
+    font-size: 12px;
+    padding: 10px 0;
   }
 }
