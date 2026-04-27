@@ -22,11 +22,7 @@ app.use(cors({
 
 // ✅ DynamoDB client
 const client = new DynamoDBClient({
-  region: "ap-south-2", // India region
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY
-  }
+  region: "ap-south-2"
 })
 
 // ✅ Document client (easy JSON handling)
