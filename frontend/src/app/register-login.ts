@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class RegisterLogin {
     this.currentUser.set(user);
   }
 
- getLogin(data:any):Observable<any>{
-  return this.http.post("http://localhost:3000/applog", data)
+getLogin(data: any) {
+  return this.http.post(`${environment.apiUrl}/applog`, data);
 }
 }
