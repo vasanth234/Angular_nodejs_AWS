@@ -1,0 +1,100 @@
+<div class="container">
+   <button onclick="history.back()" style="font-size:20px; cursor:pointer; margin-right:100px">
+  ← Back
+</button>
+  <div class="row">
+  <div class="col-6" *ngIf="event">
+  <img [src]="event.image" width="70%" style="margin-top:40px">
+  <p style="margin-top:20px">Book Event: {{event.date}}</p>
+</div>
+    <div class="col-6 mt-4">
+     <form  #bookForm="ngForm" class="formselect" (ngSubmit)="submitForm(bookForm)">
+  
+ <div class="label">
+  <label>FirstName</label>
+
+  <input 
+    type="text"
+    [(ngModel)]="formData.first_name"
+    name="firstName"
+    #firstName="ngModel"
+    required
+  />
+
+  <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+    <small style="color:red;">First name is required</small>
+  </div>
+</div>
+
+<div class="label">
+  <label>Seats</label>
+  <input 
+    type="number" 
+    [(ngModel)]="formData.seats" 
+    name="seats" 
+    #seats="ngModel"
+    required
+    min="1"
+  />
+
+  <div *ngIf="seats.invalid && (seats.dirty || seats.touched)">
+    <small style="color:red;">
+      Seats are required and must be at least 1
+    </small>
+  </div>
+</div>
+
+<div class="label">
+  <label>Email</label>
+  <input
+    type="email"
+    [(ngModel)]="formData.email"
+    name="email"
+    #email="ngModel"
+    required
+    email
+  />
+
+  <div *ngIf="email.invalid && (email.dirty || email.touched)">
+    <small style="color:red;" *ngIf="email.errors?.['required']">
+      Email is required
+    </small>
+
+    <small style="color:red;" *ngIf="email.errors?.['email']">
+      Enter a valid email address
+    </small>
+  </div>
+</div>
+
+ <div class="label">
+  <label>Gender</label><br>
+
+  <input
+    type="radio"
+    name="gender"
+    value="male"
+    [(ngModel)]="formData.gender"
+    #gender="ngModel"
+    required
+  /> Male
+
+  <input
+    type="radio"
+    name="gender"
+    value="female"
+    [(ngModel)]="formData.gender"
+    required
+  /> Female
+
+  <div *ngIf="gender.invalid && (gender.touched || gender.dirty)">
+    <small style="color:red;">Gender is required</small>
+  </div>
+</div>
+
+ <button class="btn btn-primary" [disabled]="bookForm.invalid">
+  Submit
+</button>
+</form>
+    </div>
+  </div>
+</div>

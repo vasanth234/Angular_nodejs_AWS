@@ -1,11 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { RegisterLogin } from '../register-login';
+import { Component, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
-
-
-
-
+import { RegisterLogin } from '../register-login';
+import { CommonModule } from '@angular/common';
 export interface LoginUser {
   email: string;
   password: string;
@@ -13,34 +10,34 @@ export interface LoginUser {
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink,CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
 
-
-  
-
-  
   logged = signal<LoginUser>({
     email: '',
     password: ''
   });
 
-  constructor(private registerservcie:RegisterLogin,private router:Router) {}
+  constructor(
+    private registerService: RegisterLogin,
+    private router: Router
+  ) {}
 
 
-  onLogin(){
-     this.registerservcie.getLogin(this.logged()).subscribe({
-    next: (data) => {
-      console.log('Success', data);
-       this.router.navigate(['/home']);
-    },
-    error: (error) => {
-      console.log('Error occurred', error);
-    }
-  });
 
+  // ✅ login function
+  onLogin() {
+    this.registerService.getLogin(this.logged()).subscribe({
+      next: (data) => {
+        console.log('Success', data);
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.log('Error occurred', error);
+      }
+    });
   }
 }

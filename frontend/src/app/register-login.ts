@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,10 +10,13 @@ export class RegisterLogin {
   
   constructor(private http: HttpClient) {}
 
+    // 👇 store logged-in user globally
+  currentUser = signal<{ name: string } | null>(null);
+
 
   getRegister(user: any) {
     return this.http.post(
-      'http://localhost:3004/register',
+      'http://localhost:3000/register',
       user,
       {
         headers: {
@@ -23,7 +26,12 @@ export class RegisterLogin {
     );
   }
 
-  getLogin(data:any):Observable<any>{
-    return this.http.post("http://localhost:3004/login",data)
+  // ✅ FIXED method name + type
+  setUser(user: { name: string }) {
+    this.currentUser.set(user);
   }
+
+ getLogin(data:any):Observable<any>{
+  return this.http.post("http://localhost:3000/applog", data)
+}
 }

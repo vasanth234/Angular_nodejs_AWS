@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 
 
 export interface User {
-   fullName: string;
+   name: string;
   email: string;
   password: string;
 }
@@ -24,7 +24,7 @@ export class Register {
   
   
   user = signal<User>({
-    fullName: '',
+    name: '',
   email: '',
   password: ''
   });
@@ -32,7 +32,6 @@ export class Register {
 
 
   constructor(private registerservcie:RegisterLogin,private router:Router) {}
-
 onRegister() {
   this.registerservcie.getRegister(this.user()).subscribe({
     next: (data: any) => {
@@ -40,9 +39,13 @@ onRegister() {
 
       if (data.message === 'User registered successfully') {
         console.log('Navigating to home...');
+
+        // ✅ FIXED
+        this.registerservcie.setUser({
+          name: this.user().name
+        });
+
         this.router.navigate(['/home']);
-      } else {
-        console.log('Unexpected response');
       }
     },
     error: (error) => {

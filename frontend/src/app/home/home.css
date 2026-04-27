@@ -105,3 +105,25 @@ button {
 button:hover {
   background: #e63e1f;
 }
+
+.scroller {
+  background-color: lightgreen;
+  color: black;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.scroller-text {
+  display: inline-block;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

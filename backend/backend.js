@@ -7,6 +7,7 @@ const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb")
 
 const register = require("./routes/register")
 const login = require("./routes/login")
+const booking = require('./routes/booking')
 
 dotenv.config()
 
@@ -36,6 +37,7 @@ app.set("db", docClient)
 
 app.use("/register", register)
 app.use("/applog", login)
+app.use("/book",booking)
 
 app.listen(3000, () => {
   console.log('connected server')

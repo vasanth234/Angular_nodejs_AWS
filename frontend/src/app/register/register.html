@@ -7,8 +7,8 @@
       <label>Name</label>
       <input
         type="text"
-        [value]="user().fullName"
-        (input)="user.update(u => ({ ...u, fullName: $any($event.target).value }))"
+        [value]="user().name"
+        (input)="user.update(u => ({ ...u, name: $any($event.target).value }))"
         placeholder="Enter your name"
       />
     </div>
@@ -38,7 +38,7 @@
     <!-- Live Preview -->
     <div class="preview">
       <h3>Preview</h3>
-      <p><b>Name:</b> {{ user().fullName }}</p>
+      <p><b>Name:</b> {{ user().name }}</p>
       <p><b>Email:</b> {{ user().email }}</p>
       <p><b>Password:</b> {{ user().password }}</p>
     </div>

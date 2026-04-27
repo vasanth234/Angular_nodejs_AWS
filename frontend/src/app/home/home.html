@@ -1,7 +1,14 @@
 <!-- Navbar -->
 <header class="navbar">
-    <a routerLink="/profile" >profile</a>
+   <a style="text-decoration: none;"    routerLink="/profile">
+  👤 {{ userName || 'Profile' }}
+</a>
   <h1>🎟️ BookMyEvent</h1>
+  <div class="scroller">
+ <p >Your one-stop destination for concerts, movies & live events</p>
+
+  </div>
+ 
 
   <nav>
     <a routerLink="/">Home</a>
@@ -38,7 +45,7 @@
         <p>📍 {{ event.location }}</p>
         <p>📅 {{ event.date }}</p>
 
-        <button (click)="bookEvent(event)">
+        <button (click)="bookEvent(event)" routerLink="/book">
           Book Now
         </button>
       </div>

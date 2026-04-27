@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterPipePipe } from '../filter-pipe-pipe';
 import { RouterLink } from '@angular/router';
+import { Sharedservice } from '../sharedservice';
+import { RegisterLogin } from '../register-login';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,12 @@ import { RouterLink } from '@angular/router';
 })
 export class Home {
 
+  constructor(private sharedservice:Sharedservice,private registerLogin:RegisterLogin){
+
+  }
+
   searchText: string = '';
+
 
   events = [
     {
@@ -44,5 +51,15 @@ export class Home {
 
   bookEvent(event: any) {
     console.log('Booking:', event);
+    this.sharedservice.setEvent(event)
+
   }
+
+  get userName() {
+  return this.registerLogin.currentUser()?.name;
+}
+
+
+  
+
 }
