@@ -18,7 +18,7 @@ event:any
 
   }
 
-  statenames= states
+  states= states
   selectedDistricts:any[]=[]
 
   formData = {
@@ -81,7 +81,7 @@ submitForm(form: any) {
 
 
 onStateChange(stateName: string) {
-  const selectedState = this.statenames.find(s => s.name === stateName);
+  const selectedState = this.states.find(s => s.name === stateName);
   this.selectedDistricts = selectedState ? selectedState.districts : [];
   
   // Reset district when state changes
