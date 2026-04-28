@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { GetCommand } = require("@aws-sdk/lib-dynamodb");
+const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt"); // ✅ add this
 
 router.post("/", async (req, res) => {
