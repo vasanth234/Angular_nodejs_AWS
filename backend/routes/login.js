@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const { GetCommand } = require("@aws-sdk/lib-dynamodb");
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcrypt"); // ✅ add this
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   try {
@@ -28,8 +28,20 @@ router.post("/", async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
+    // ✅ create JWT token
+    const token = jwt.sign(
+      {
+        email: result.Item.email,
+        name: result.Item.name
+      },
+      process.env.JWT_SECRET,   // keep this in .env
+      { expiresIn: "1h" }
+    );
+
+    // ✅ send token + user
     res.json({
       message: "Login successful",
+      token,
       user: {
         email: result.Item.email,
         name: result.Item.name
