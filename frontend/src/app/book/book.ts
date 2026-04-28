@@ -3,6 +3,7 @@ import { Sharedservice } from '../services/sharedservice';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import {states} from '../constants/constant';
 
 @Component({
   selector: 'app-book',
@@ -17,11 +18,16 @@ event:any
 
   }
 
+  states= states
+  selectedDistricts:any[]=[]
+
   formData = {
   first_name: '',
   seats: 0,
   email: '',
-  gender: ''
+  gender: '',
+  state:'',
+  district:''
 };
 
 
@@ -69,5 +75,16 @@ submitForm(form: any) {
     );
     form.resetForm()
   });
+}
+
+
+
+
+onStateChange(stateName: string) {
+  const selectedState = this.states.find(s => s.name === stateName);
+  this.selectedDistricts = selectedState ? selectedState.districts : [];
+  
+  // Reset district when state changes
+  this.formData.district = '';
 }
 }
